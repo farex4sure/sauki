@@ -82,16 +82,20 @@ session_start();
     </div>
 
     <!-- Buttom Navigation -->
-    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44]">
-      <a href="./appointment.php" class="text-center space-y-1">
+    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44] ">
+      <a href="dashboard.php" class="text-center space-y-1">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <p>Home</p>
+      </a>
+        <a href="./appointment.php" class="text-center space-y-1">
         <i class="fa-regular fa-calendar fa-xl"></i>
         <p>Appointment</p>
       </a>
-      <a href="./payments.php" class="text-center space-y-1">
+        <a href="./payments.php" class="text-center space-y-1">
         <i class="fa-solid fa-money-bill fa-xl"></i>
         <p>Payments</p>
       </a>
-      <a href="./insurance.php" class="text-center space-y-1">
+     <a href="./insurance-dashboard.php" class="text-center space-y-1">
         <i class="fa-solid fa-house-medical-circle-check fa-xl"></i>
         <p>Insurance</p>
       </a>
@@ -137,27 +141,23 @@ session_start();
         </a>
       </div>
     <div class="space-y-5 text-sm">
+      <p class="font-semibold">History</p>
       <?php
-      $details="SELECT * FROM appointments WHERE userid='".$_SESSION['phone']."'";
+      $details="SELECT * FROM appointments WHERE userid='".$_SESSION['phone']."' ORDER BY ID DESC";
         $result2 = $link->query($details);
         if ($result2->num_rows > 0) {
             while($row2 = $result2->fetch_assoc()) {
                 $hcode = $row2["hospitalid"];
                 $user = $row2["userid"];
                 $date = $row2["datetime"];
-                }
-        if($_SESSION['phone'] == $user){
         ?>
 
-        <p class="font-semibold">History</p>
         <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <p class="font-semibold"><?php echo date('d-m-y, h:i A',$date); ?></p>
+          <p class="font-semibold"><?php echo date('d-M-Y, h:i A',$date); ?></p>
           <p class="font-semibold text-green-500">Booked</p>
         </div>
     <?php
-    }else{
-        echo "no any appointment booked yet";
-    }
+        }
         }else{
         echo "no any appointment booked yet";
     }

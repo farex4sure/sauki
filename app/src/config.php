@@ -1,5 +1,5 @@
 <?php
-$link=mysqli_connect("localhost", "id19369351_saukicare", "y^P88qFAnu986Es", "id19369351_sauki");
+$link=mysqli_connect("localhost", "root", "", "sauki");
 
 // Check connection
 if (mysqli_connect_errno())

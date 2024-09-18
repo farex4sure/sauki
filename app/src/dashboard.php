@@ -141,7 +141,7 @@ $balance = $data['bal'];
               </svg>
 
             </div>
-            <p class="font-bold text-sm leading-tight">Sauki Insurance</p>
+            <p class="font-bold text-sm leading-tight">Medford Insurance</p>
           </div>
         </a>
       </div>

@@ -1,3 +1,8 @@
+<?php
+include "config.php";
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,16 +72,20 @@
     </div>
 
     <!-- Buttom Navigation -->
-    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44]">
-      <a href="./appointment.php" class="text-center space-y-1">
+    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44] ">
+      <a href="dashboard.php" class="text-center space-y-1">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <p>Home</p>
+      </a>
+        <a href="./appointment.php" class="text-center space-y-1">
         <i class="fa-regular fa-calendar fa-xl"></i>
         <p>Appointment</p>
       </a>
-      <a href="./payments.php" class="text-center space-y-1">
+        <a href="./payments.php" class="text-center space-y-1">
         <i class="fa-solid fa-money-bill fa-xl"></i>
         <p>Payments</p>
       </a>
-      <a href="./insurance.php" class="text-center space-y-1">
+     <a href="./insurance-dashboard.php" class="text-center space-y-1">
         <i class="fa-solid fa-house-medical-circle-check fa-xl"></i>
         <p>Insurance</p>
       </a>
@@ -115,76 +124,43 @@
 
       <div class="space-y-5 text-sm">
         <p class="font-semibold">History</p>
+        <?php
+        $details="SELECT * FROM transaction WHERE sender='".$_SESSION['phone']."' OR reciever='".$_SESSION['phone']."' ORDER BY ID DESC";
+          $result2 = $link->query($details);
+          if ($result2->num_rows > 0) {
+              while($row2 = $result2->fetch_assoc()) {
+                  $sender = $row2["sender"];
+                  $receiver = $row2["reciever"];
+                  $amount = $row2["amount"];
+                  $date = $row2["dt"];
+          if($sender == $_SESSION['phone']){
+        ?>
         <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
           <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
+            <p class="font-semibold font-varela text-red-500"><?php echo $amount ?></p>
+            <p class="text-xs"><?php echo $dt ?></p>
           </div>
-          <p class="font-semibold text-green-500">Successful</p>
+          <p class="font-semibold text-red-500">Debit</p>
         </div>
+        <?php
+          }else{
+        ?>
         <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
           <div>
-            <p class="font-semibold font-varela">N50,000</p>
-            <p class="text-xs">5th Aug., 2022 | 01:00pm</p>
+            <p class="font-semibold font-varela text-green-500"><?php echo $amount ?></p>
+            <p class="text-xs"><?php echo $date ?></p>
           </div>
-          <p class="font-semibold text-red-500">Failed</p>
+          <p class="font-semibold text-green-500">Credit</p>
         </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-red-500">Failed</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-green-500">Successful</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-green-500">Successful</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-red-500">Failed</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-green-500">Successful</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-red-500">Failed</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-green-500">Successful</p>
-        </div>
-        <div class="bg-white rounded-lg px-4 py-5 flex justify-between items-center">
-          <div>
-            <p class="font-semibold font-varela">N5,000</p>
-            <p class="text-xs">10th Feb, 2022 | 05:00pm</p>
-          </div>
-          <p class="font-semibold text-green-500">Successful</p>
-        </div>
+        <?php
+          }
+        ?>
+        <?php
+              }
+            }else{
+              echo "no any payment yet";
+            }
+        ?>
 
       </div>
       <!-- <a href="./dashboard.php" class="">

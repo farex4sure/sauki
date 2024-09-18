@@ -179,16 +179,20 @@ curl_close($curl);
     </div>
 
     <!-- Buttom Navigation -->
-    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44]">
-      <a href="./appointment.php" class="text-center space-y-1">
+    <div class="bg-white text-primary py-3 px-5 fixed bottom-0 inset-x-0 justify-between flex text-xs z-[44] ">
+      <a href="dashboard.php" class="text-center space-y-1">
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <p>Home</p>
+      </a>
+        <a href="./appointment.php" class="text-center space-y-1">
         <i class="fa-regular fa-calendar fa-xl"></i>
         <p>Appointment</p>
       </a>
-      <a href="./payments.php" class="text-center space-y-1">
+        <a href="./payments.php" class="text-center space-y-1">
         <i class="fa-solid fa-money-bill fa-xl"></i>
         <p>Payments</p>
       </a>
-      <a href="./insurance.php" class="text-center space-y-1">
+     <a href="./insurance-dashboard.php" class="text-center space-y-1">
         <i class="fa-solid fa-house-medical-circle-check fa-xl"></i>
         <p>Insurance</p>
       </a>

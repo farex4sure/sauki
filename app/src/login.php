@@ -9,6 +9,7 @@
         header("location: dashboard.php");
         exit;
     }
+    // $me = "";
 
 
     if(isset($_POST['otpget'])){
@@ -130,18 +131,25 @@
 
       <div class="my-5">
         <form action="" method="POST" class="space-y-5">
+          <?php 
+            if(isset($_SESSION["phone"])){ 
+              $me = $_SESSION["phone"];
+              }else{ 
+              $me = ""; 
+            } 
+          ?>
           <div>
             <label for="phone">Phone Number</label>
-            <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" class="input">
+            <input type="tel" name="phone" id="phone" value="<?php echo $me ?>" placeholder="Enter your phone number" class="input">
             <button class="button" type="submit" name="otpget">get otp</button>
           </div>
           <div>
             <label for="password">OTP</label>
             <div class="grid grid-cols-4 gap-x-5 my-3">
-              <input type="text" class="otp-input" name="otp1">
-              <input type="text" class="otp-input" name="otp2">
-              <input type="text" class="otp-input" name="otp3">
-              <input type="text" class="otp-input" name="otp4">
+              <input type="text" class="otp-input" name="otp1" maxlength="1" oninput="moveToNext(this, 'otp2')" onkeydown="moveToPrev(event, this, 'otp1')">
+              <input type="text" class="otp-input" name="otp2" maxlength="1" oninput="moveToNext(this, 'otp3')" onkeydown="moveToPrev(event, this, 'otp1')">
+              <input type="text" class="otp-input" name="otp3" maxlength="1" oninput="moveToNext(this, 'otp4')" onkeydown="moveToPrev(event, this, 'otp2')">
+              <input type="text" class="otp-input" name="otp4" maxlength="1" oninput="moveToNext(this, '')" onkeydown="moveToPrev(event, this, 'otp3')">
             </div>
           </div>
           <button class="button" type="submit" name="login">Login</button>
@@ -171,6 +179,25 @@ get better health.</p>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
+  <script>
+    function moveToNext(current, nextFieldName) {
+      if (current.value.length === current.maxLength) {
+        const nextInput = document.getElementsByName(nextFieldName)[0];
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    }
+
+    function moveToPrev(event, current, prevFieldName) {
+      if (event.key === "Backspace" && current.value === '') {
+        const prevInput = document.getElementsByName(prevFieldName)[0];
+        if (prevInput) {
+          prevInput.focus();
+        }
+      }
+    }
+  </script>
   <script>
 
     AOS.init({
